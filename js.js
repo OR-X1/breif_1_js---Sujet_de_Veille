@@ -15,40 +15,18 @@ var resultList = [];
 var count = 1;
 
 var ind = 1;
-// var limitarray = 0;
 
 var i=0;
 
-// var headerNames;
-
-// function stringArray(){
-// 	var nameList = $("#stringArray").val();
-  
-// 	$.each(nameList.split(/\n/), function (i, name) {
-
-// 		// check if string is empty
-// 		if(name != ""){
-// 			// namesList.push(name);
-// 			namesList.push({'id': i+1 , 'name': name});
-
-// 			limitarray++;
-// 		}
-// 	});
-// 	console.warn(limitarray);
-// }
 
 
 
 
 
 
-// var close = document.getElementsByClassName("close");
-        // for (i = 0; i < close.length; i++) {
-        //   close[i].onclick = function() {
-        //     // var div = this.parentElement;
-        //     // div.style.display = "none";
-        //   }
-        // }
+document.getElementById('json').style.display= 'none';
+document.getElementById('pdf').style.display= 'none';
+
 
         
         // Create a new list item when clicking on the "Add" button
@@ -64,43 +42,43 @@ var i=0;
 			  alert("You must write something!");
 			} else {
 			  namesList.push({'id': i+1 , 'name': myName, 'sujet': Subject});
-			  document.getElementById("myUL").appendChild(li);
+			//   document.getElementById("myUL").appendChild(li);
+
+			  document.getElementById("myUL").innerHTML= '';
+					namesList.forEach(element => {
+						document.getElementById("myUL").innerHTML += `
+							<li>${element.id} : ${element.name}</li>
+							`
+					});
+
 			}
 			document.getElementById("myName").value = "";
 			document.getElementById("Subject").value = "";
 		  
-  
-  
-  
-		  //   var span = document.createElement("SPAN");
-		  //   var txt = document.createTextNode("\u00D7");
-		  //   span.className = "close";
-		  //   span.appendChild(txt);
-		  //   li.appendChild(span);
-		  
-		  //   for (i = 0; i < close.length; i++) {
-		  //     close[i].onclick = function() {
-		  //       var div = this.parentElement;
-		  //       div.style.display = "none";
-		  //     }
-		  //   }
 		  }
 
-
-
+		  if(namesList.length == 0){
+			headerOne.style.display = "none";
+			
+		}
 
 
 // Start or stop the name shuffle on button click
 startButton.addEventListener('click', function() {
+
+	headerOne.style.display = "block";
+	document.getElementById('json').style.display= 'block';
+	document.getElementById('pdf').style.display= 'block';
 
 	var date=document.getElementById("date").value;
 	if(namesList.length == 1){
 		this.style.display = "none";
 	}
 
+
 	// intervalHandle = setInterval(function () {
 		var u = rand();
-		headerOne.textContent = namesList[u].id + namesList[u].name;
+		headerOne.textContent = namesList[u].name;
 	// }, 500);
 
     // setTimeout(clearInterval, 2000, (intervalHandle));
@@ -109,11 +87,14 @@ startButton.addEventListener('click', function() {
 		
 		namesList.splice(u, 1);
 
-	// console.log(namesList);
-	// console.log(namesList.length);
-	// console.log(resultList);
-	
-	// if(resultList.length == sizeOfArray){
+
+		document.getElementById("myULRes").innerHTML= '';
+				resultList.forEach(element => {
+						document.getElementById("myULRes").innerHTML += `
+							<li>${element.id} : ${element.name}</li>
+							`
+					});
+
 		tbody.innerHTML= ''
 		resultList.forEach(element => {
 			tbody.innerHTML += `
@@ -138,7 +119,6 @@ startButton.addEventListener('click', function() {
 			`
 			
 		});
-	// }
 
 });
 
@@ -151,31 +131,7 @@ function rand(){
 	
 }
 
-// function datee(){
 
-// var date=document.getElementById("date").value;
-// var result=new Date(date);
-// var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-// var dayName;
-
-// 			result.setDate(result.getDate() -1);
-
-// 			result.setDate(result.getDate() + count);
- 
-// 			dayName = days[result.getDay()];
-// 			console.log(dayName);
-   
-// 			if(dayName=="Saturday"){
-// 			   result.setDate(result.getDate() + 2);
-// 			}
-// 			else if(dayName=="Sunday"){
-// 			   result.setDate(result.getDate() + 1);
-// 			}
-// 			// console.log(result.getDate()+"/"+result.getMonth()+"/"+result.getFullYear());
-// 			count++;
-			
-// 			return result.getDate()+"/"+result.getMonth()+"/"+result.getFullYear();
-// }
 
 const datee = (date, days) => {
 	
