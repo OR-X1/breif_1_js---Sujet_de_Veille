@@ -3,24 +3,19 @@ const startButton = document.getElementById('startButton');
 const headerOne = document.getElementById('headerNames');
 const tbody = document.getElementById('tbody');
 
-var sizeOfArray = document.getElementById("numberOfArray").value;
 
 
 
-console.log(sizeOfArray);
+
+// console.log(sizeOfArray);
 // Add list of names
 var namesList = [];  
 var resultList = []; 
 
+
 var count = 1;
-
 var ind = 1;
-
 var i=0;
-
-
-
-
 
 
 
@@ -28,11 +23,24 @@ document.getElementById('json').style.display= 'none';
 document.getElementById('pdf').style.display= 'none';
 
 
+
+function numberOfArray(){
+
+	const sizeOfArray = document.getElementById("numberOfArray").value;
+	console.log(sizeOfArray);
+
+
+		if(sizeOfArray <= namesList.length){
+		document.getElementById('addBtn').style.display= 'none';
+	}else{
+		document.getElementById('addBtn').style.display= 'block';
+	}
+}
         
         // Create a new list item when clicking on the "Add" button
         function newElement() {
+
 			var li = document.createElement("li");
-			
   
 			var myName = document.getElementById("myName").value;
 			var Subject = document.getElementById("Subject").value;
@@ -42,6 +50,7 @@ document.getElementById('pdf').style.display= 'none';
 			  alert("You must write something!");
 			} else {
 			  namesList.push({'id': i+1 , 'name': myName, 'sujet': Subject});
+			  i++;
 			//   document.getElementById("myUL").appendChild(li);
 
 			  document.getElementById("myUL").innerHTML= '';
@@ -50,21 +59,23 @@ document.getElementById('pdf').style.display= 'none';
 							<li>${element.id} : ${element.name}</li>
 							`
 					});
-
 			}
 			document.getElementById("myName").value = "";
 			document.getElementById("Subject").value = "";
-		  
-		  }
 
-		  if(namesList.length == 0){
-			headerOne.style.display = "none";
-			
+			numberOfArray();
+
 		}
 
+			if(namesList.length == 0){
+				headerOne.style.display = "none";
+			}
 
-// Start or stop the name shuffle on button click
+
+// Start the name shuffle on button click
 startButton.addEventListener('click', function() {
+
+	
 
 	headerOne.style.display = "block";
 	document.getElementById('json').style.display= 'block';
@@ -78,7 +89,48 @@ startButton.addEventListener('click', function() {
 
 	// intervalHandle = setInterval(function () {
 		var u = rand();
-		headerOne.textContent = namesList[u].name;
+		// setTimeout(() => {
+			headerOne.textContent = namesList[u].name;
+		// }, 2000);
+
+
+		  // animation -------------------------------------------------------
+
+		//   const circuference = 260; // deg
+
+		//   const data = {
+		// 	// labels: ["Red", "Blue", "Yellow"],
+		// 	datasets: [
+		// 	  {
+		// 		// label: "My First Dataset",
+		// 		data: [1],
+		// 		backgroundColor: [
+		// 		  "rgb(255, 99, 132)",
+		// 		]
+		// 	  }
+		// 	]
+		//   };
+		  
+		//   const config = {
+		// 	type: "doughnut",
+		// 	data: data,
+		// 	options: {   
+		// 	  reponsive: true,
+		// 	  maintainAspectRatio: false,
+		// 	  rotation: (circuference / 2) * -1,
+		// 	  circumference: circuference,
+		// 	  cutout: "90%",
+		// 	  borderWidth: 0,
+		// 	  animation: {
+		// 		  duration: 2000,
+		// 	  },
+		// 	}
+		//   };
+		  
+		//   const myChart = new Chart("myChart", config);
+
+
+
 	// }, 500);
 
     // setTimeout(clearInterval, 2000, (intervalHandle));
@@ -91,7 +143,7 @@ startButton.addEventListener('click', function() {
 		document.getElementById("myULRes").innerHTML= '';
 				resultList.forEach(element => {
 						document.getElementById("myULRes").innerHTML += `
-							<li>${element.id} : ${element.name}</li>
+							<li>${element.id} : ${element.name} : ${element.date}</li>
 							`
 					});
 
@@ -123,8 +175,7 @@ startButton.addEventListener('click', function() {
 });
 
 
-
-
+// random -------------------------------------------
 function rand(){
 
 	return Math.floor(Math.random() * namesList.length);
@@ -132,7 +183,7 @@ function rand(){
 }
 
 
-
+// date -------------------------------------------
 const datee = (date, days) => {
 	
 	var d = moment(new Date(date)).add(Math.floor(days / 5) * 7, 'd');
@@ -142,15 +193,10 @@ const datee = (date, days) => {
 	  if (d.day() !== 0 && d.day() !== 6)
 		remaining--;
 	}
-	return d;
+	return d.format('yyy-mm-dd');
   };
 
 
-          $(document).ready(function() {
-            $('#example').DataTable( {
-              dom: 'Bfrtip',
-              buttons: [
-                'copy','excel', 'pdf', 'print'
-              ]
-            } );
-          } );
+
+
+

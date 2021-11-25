@@ -8,6 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
 
     <style>
       body {
@@ -91,6 +93,15 @@
       }
       </style>
 
+  <style>
+    .halfdoughnut {
+      height: 300px;
+      width: 400px;
+      margin: 1em auto;
+      /* overflow: hidden; */
+      /* border: 1px dashed rgba(0,0,0,.1);  */
+    }
+  </style>
 
 
 </head>
@@ -102,24 +113,24 @@
 
                   <nav>
                     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                      <a class="nav-item nav-link active" id="nav-home-tab" href="#nav-home" data-toggle="tab" role="tab" aria-controls="nav-home" aria-selected="true">Entries</a>
-                      <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Results</a>
+                      <a class="nav-item nav-link rounded-0 active" id="nav-home-tab" href="#nav-home" data-toggle="tab" role="tab" aria-controls="nav-home" aria-selected="true">Entries</a>
+                      <a class="nav-item nav-link rounded-0" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Results</a>
                     </div>
                   </nav>
 
                   <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                      <label for="birthday" class="text-light">begin date:</label>
+                    <div class="tab-pane fade show active my-3" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                      <label for="birthday" class="text-light ">begin date:</label>
                       <input class="form-control border-0 rounded-0" type="date" id="date" name="date">
 
                         <div>
-                          <div id="myDIV" class="header">
+                          <div id="myDIV" class="header mt-3">
                             <h2 style="margin:5px" class="text-light">Your List</h2>
-                            <input type="number" id="numberOfArray" placeholder="size of list" class="w-100">
-                            <div class="group-input d-flex">
+                            <input type="number" onkeyup="numberOfArray()" min="1" value="1" id="numberOfArray" placeholder="size of list" class="w-100">
+                            <div class="group-input d-flex bg-light">
                               <input type="text" id="myName" placeholder="Name">
                               <input type="text" id="Subject" placeholder="Subject">
-                              <span onclick="newElement()" class="addBtn">Add</span>
+                              <span onclick="newElement()" id="addBtn" class="addBtn">Add</span>
                             </div>
                           </div>
 
@@ -134,9 +145,9 @@
                       </ul>
 
                       <div  class="my-4 d-flex">
-                        <button class="btn btn-secondary w-50 mx-1" name="btnExport" id="json">JSON</button>
+                        <button class="btn btn-secondary rounded-0 w-50 mx-1" name="btnExport" id="json">JSON</button>
                         
-                        <button class="btn btn-secondary w-50 mx-1" name="btnExport" id="pdf">PDF</button>
+                        <button class="btn btn-secondary rounded-0 w-50 mx-1" name="btnExport" id="pdf">PDF</button>
                         
                         <!-- <button class="btn btn-secondary" id="csv">CSV</button> -->
                         
@@ -152,13 +163,19 @@
 
                 <div class="col-9 d-flex m-auto justify-content-center">
                     <div class="">
-                      <h1 id="headerNames">guess</h1>
-                      <div class="button" id="startButton">start</div>
-                      <!-- <div class="button" id="stopButton">stop</div> -->
+                      <!-- <div class="halfdoughnut"> -->
+                        <!-- <canvas id="myChart">
+                        </canvas> -->
+                        <h1 id="headerNames"  class="my-4"></h1>
+                        <!-- style="position: relative;top: -216px;" -->
+                        
+                        <div class="button" id="startButton">start</div>
+                      <!-- </div> -->
                     </div>
+                  </div>
                 </div>
-            </div>
 
+                
 
 
             <div class="table-responsive">
@@ -202,11 +219,14 @@
         
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.6.0/chart.min.js'></script>
   <script src="js.js"></script>
 
 
 
 <script type="text/javascript" src="src/jquery-3.3.1.slim.min.js"></script>
+
+
 
 <script type="text/javascript" src="src/jspdf.min.js"></script>
 
